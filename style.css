@@ -29,7 +29,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.4rem 7%;
-  background-color: rgba(1, 1, 1 0.8);
+  background-color:black;
   border-bottom: 1px solid #bda287;
   position: fixed;
   top: 0;
@@ -84,12 +84,102 @@ body {
   display: none;
 }
 
+/* navbars search form */
+.navbar .search-form {
+  position: absolute;
+  top: 100%;
+  right: 7%;
+  background-color: white;
+  width: 50rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: 0.3s;
+}
+
+.navbar .search-form.active{
+  transform:scaleY(1);
+}
+
+.navbar .search-form input{
+  height: 100%;
+  width: 100%;
+  font-size: 1.6rem;
+  color: var(--bg);
+  padding: 1rem;
+}
+
+.navbar .search-form label{
+  position: pointer;
+  font-size: 2rem;
+  margin-right: 1.5rem;
+  color: var(--bg);
+}
+
+/* shopping cart */
+.shopping-cart {
+  position: fixed; /* agar tidak ikut scroll */
+  top: 6rem; /* beri jarak dari navbar */
+  right: -100%;
+  width: 25rem;
+  max-width: 100%;
+  height: calc(100vh - 5.5rem); /* tinggi penuh tanpa menutupi navbar */
+  background-color: #fff;
+  color: var(--bg);
+  transition: 0.3s;
+  padding: 1rem;
+  overflow-y: auto;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+  z-index: 9998;
+}
+
+.shopping-cart.active{
+  right: 0%;
+}
+
+.shopping-cart .cart-item{
+  max-resolution: 2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed #666;
+
+}
+
+.shopping-cart img{
+  height: 4rem;
+  border-radius: 50%;
+}
+
+.shopping-cart h3{
+  font-size: 1.3rem;
+  padding-bottom: 0.5rem; 
+}
+
+.shopping-cart .item-price{
+  font-size: 1.2rem;
+}
+
+.shopping-cart .remove-item{
+  position:absolute;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.shopping-cart .remove-item:hover{
+  color: var(--bg);
+}
+
+
 /*hero section*/
 .hero {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background-image: url("backgroundkopken.jpg");
+  background-image: url("gambar/backgroundkopken.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -116,7 +206,7 @@ body {
 }
 
 .hero .content h1 {
-  font-size: 5em;
+  font-size: 5rem;
   color: white;
   text-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
   line-height: 1.2;
@@ -149,11 +239,19 @@ body {
 /*about section*/
 .about,
 .menu,
+.products{
+  text-align: center;
+  margin-bottom: 3rem;
+}
 .contact {
   padding: 8rem 7% 1.4rem;
 }
+
 .about h2,
 .menu h2,
+.products h2{
+margin-top: 1rem;
+}
 .contact h2 {
   text-align: center;
   font-size: 2.6rem;
@@ -162,6 +260,7 @@ body {
 
 .about h2 span,
 .menu h2 span,
+.products h2 span,
 .contact h2 span {
   color: var(--primary);
 }
@@ -229,6 +328,84 @@ body {
 
 .menu .row .menu-card .menu-card-title {
   margin-top: 1rem auto 0.5rem;
+}
+/* product section */
+
+.products .row{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+.products .product-card{
+  text-align: center;
+  border: 1px solid #666;
+  padding: 2rem;
+}
+.products .product-image img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+.products .product-icons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.products .product-icons a {
+  width: 4rem;
+  height: 4rem;
+  color: #fff;
+  margin: 0.3rem;
+  border: 1px solid #666;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.products .product-icons a:hover {
+  background-color: var(--primary); 
+  border: 1pxx solid var(--primary);
+}
+
+.products .products-image{
+  padding: 1rem 0;
+}
+
+.products .products-image img{
+  height: 25rem ;
+}
+
+.products .product-content h3{
+  font-size: 2rem; 
+}
+
+.products .product-stars {
+  font-size: 1.7rem;
+  padding: 0.8rem;
+  color: var(--primary);
+}
+
+.products .product-stars .star-full{
+  fill: var(--primary);
+}
+
+.products .product-price{
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.products .product-price span{
+  text-decoration: line-through;
+  font-weight: lighter;
+  font-size: 1rem;
+
 }
 
 /*contact section*/
@@ -321,6 +498,85 @@ footer .credit a {
   color: var(--bg);
   font-weight: 700;
 }
+
+/* Modal Box */
+/* Item Detail */
+.modal{
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-container{
+  position: relative;
+  background-color: #fefefe;
+  color: var(--bg);
+  margin: 15% auto;
+  padding:0.5rem;
+  border: 1px solid #666;
+  width: 80%;
+  animation: animateModal 0.5s;
+}
+
+/*  Modal Animation */
+@keyframes animateModal{
+  from{
+    top: -300%;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+
+.modal-container.close-icon{
+  position:absolute;
+  right: 1rem;
+}
+
+.modal-content{
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.modal-content img{
+  height: 13rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+}
+
+.modal-content p{
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-top: 1rem;
+}
+
+.modal-content a{
+  display: flex;
+  gap: 0.5rem;
+  width: 15rem;
+  background-color: var(--primary);
+  color: #fff;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0.2rem;
+}
+
+#about,
+#menu,
+#products,
+#contact {
+  scroll-margin-top: 100px;
+}
+
+
 /*media queries*/
 
 /*laptop*/
@@ -365,6 +621,11 @@ footer .credit a {
     transform: scaleX (0.1);
   }
 
+  .navbar .search-form{
+    width: 90%;
+    right: 2rem;
+  }
+
   .about .row {
     flex-wrap: wrap;
   }
@@ -402,6 +663,10 @@ footer .credit a {
 
   .contact .row form {
     padding-top: 0;
+  }
+
+  .modal-content{
+    flex-wrap: wrap;
   }
 }
 /*hp*/
